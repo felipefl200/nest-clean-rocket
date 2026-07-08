@@ -1,4 +1,4 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common'
+import { BadRequestException, Controller, Get, Query, UseGuards } from '@nestjs/common'
 import { FetchRecentQuestionsUseCase } from '@src/domain/forum/application/use-cases/fetch-recent-questions'
 import { JwtAuthGuard } from '@src/infrastructure/auth/jwt-auth.guard'
 import z from 'zod'
@@ -29,7 +29,7 @@ export class FetchRecentQuestionsController {
     })
 
     if (result.isLeft()) {
-      throw new Error('Não foi possível listar as perguntas')
+      throw new BadRequestException()
     }
 
     const { questions } = result.value

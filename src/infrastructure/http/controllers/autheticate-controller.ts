@@ -1,5 +1,13 @@
-import { Body, Controller, Post, UnauthorizedException, UsePipes } from '@nestjs/common'
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Post,
+  UnauthorizedException,
+  UsePipes,
+} from '@nestjs/common'
 import { AuthenticateStudentUseCase } from '@src/domain/forum/application/use-cases/autenticate-student'
+import { WrongCredentialsError } from '@src/domain/forum/application/use-cases/errors/wrong-credentials-error'
 import { ZodValidationPipe } from '@src/infrastructure/http/controllers/pipes/zod-validation-pipe'
 import z from 'zod'
 
@@ -23,7 +31,14 @@ export class AutheticateController {
     })
 
     if (result.isLeft()) {
-      throw new UnauthorizedException('User credentials are invalid')
+      const error = result.value
+
+      switch (error.constructor) {
+        case WrongCredentialsError:
+          throw new UnauthorizedException(error.message)
+        default:
+          throw new BadRequestException(error.message)
+      }
     }
 
     const { accessToken } = result.value
