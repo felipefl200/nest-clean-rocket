@@ -1,4 +1,4 @@
-@host = http://localhost:3000
+@host = http://localhost:3001
 @token = {{authentication.response.body.access_token}}
 
 ### Criar conta
@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
   "name": "Felipe França",
-  "email": "felipe@franca2.dev",
+  "email": "felipe@franca3.dev",
   "password": "felipe"
 }
 
@@ -17,7 +17,7 @@ POST {{host}}/sessions
 Content-Type: application/json
 
 {
-  "email": "felipe@franca2.dev",
+  "email": "felipe@franca3.dev",
   "password": "felipe"
 }
 
@@ -27,8 +27,8 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "title": "ta chovendo aí ?",
-  "content": "ta chovendo aí de novo ?"
+  "title": "o que há de novo pra hoje?",
+  "content": "o que há de novo pra hoje ?"
 }
 
 ### Listar perguntas

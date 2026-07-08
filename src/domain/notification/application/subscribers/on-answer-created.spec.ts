@@ -19,7 +19,6 @@ let inMemoryAnswersRepository: InMemoryAnswersRepository
 let inMemoryNotificationsRepository: InMemoryNotificationsRepository
 let sendNotificationUseCase: SendNotificationUseCase
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let sendNotificationExecuteSpy: MockInstance
 
 describe('On Answer Created', () => {

@@ -35,6 +35,7 @@ export class AuthenticateStudentUseCase {
 
     const accessToken = await this.encrypter.encrypt({
       sub: student.id.toString(),
+      email,
     })
 
     return right({ accessToken })
