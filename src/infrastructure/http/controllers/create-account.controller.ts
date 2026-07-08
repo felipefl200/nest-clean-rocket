@@ -34,7 +34,7 @@ export class CreateAccountController {
 
     const hashedPassword = await hash(
       password,
-      envApi.NODE_ENV === 'development' ? 4 : envApi.SALT_ROUNDS,
+      envApi.NODE_ENV === 'development' ? 4 : envApi.BCRYPT_COST,
     )
 
     await this.prisma.user.create({

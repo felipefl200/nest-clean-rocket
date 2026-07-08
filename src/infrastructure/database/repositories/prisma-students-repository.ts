@@ -1,0 +1,27 @@
+import { Injectable } from '@nestjs/common'
+import { StudentsRepository } from '@src/domain/forum/application/repositories/students-repository'
+import { Student } from '@src/domain/forum/enterprise/entities/student'
+
+import { PrismaStudentMapper } from '../prisma/mappers/prisma-student-mapper'
+import { PrismaService } from '../prisma/prisma.service'
+
+@Injectable()
+export class PrismaStudentsRepository implements StudentsRepository {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async findByEmail(email: string): Promise<Student | null> {
+    const student = await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    })
+    if (!student) return null
+    return PrismaStudentMapper.toDomain(student)
+  }
+
+  async create(student: Student): Promise<void> {
+    await this.prisma.user.create({
+      data: PrismaStudentMapper.toPrisma(student),
+    })
+  }
+}
