@@ -26,7 +26,8 @@
       "@infra/*": ["./src/infrastructure/*"],
       "@/core/*": ["./src/core/*"],
       "@/domain/*": ["./src/domain/*"],
-      "@test/*": ["./test/*"]
+      "@test/*": ["./test/*"],
+      "@prisma/*": ["./prisma/*"]
     },
     "types": ["node"]
   },
