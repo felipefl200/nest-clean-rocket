@@ -32,5 +32,5 @@ Authorization: Bearer {{token}}
 }
 
 ### Listar perguntas
-GET {{host}}/questions?page=1&limit=1
+GET {{host}}/questions?page=1&limit=10
 Authorization: Bearer {{token}}
