@@ -2,7 +2,7 @@ import { loadEnvFile } from 'node:process'
 
 import { defineConfig } from 'prisma/config'
 
-import { envSchema } from './src/env/env-schema'
+import { envSchema } from './src/infrastructure/env/env-schema'
 
 loadEnvFile('.env')
 
