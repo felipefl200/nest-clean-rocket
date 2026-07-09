@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { HashComparer } from '@src/domain/forum/application/cryptography/hash-comparer'
 import { HashGenerator } from '@src/domain/forum/application/cryptography/hash-generator'
-import { Env } from '@src/env/env-schema'
+import { Env } from '@src/infrastructure/env/env-schema'
 import { compare, hash } from 'bcrypt'
 
 @Injectable()
