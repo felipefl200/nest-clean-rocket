@@ -29,7 +29,7 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     if (!question) return null
     return PrismaQuestionMapper.toDomain(question)
   }
-  async findManyRecent({ page }: PaginationParams): Promise<Question[]> {
+  async findManyRecent({ page = 1 }: PaginationParams): Promise<Question[]> {
     const questions = await this.prisma.question.findMany({
       take: 20,
       skip: (page - 1) * 20,

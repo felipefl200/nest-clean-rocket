@@ -1,6 +1,6 @@
 import { OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { PrismaPg } from '@prisma/adapter-pg'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/generated'
 import { envApi } from '@src/infrastructure/env/env'
 
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
