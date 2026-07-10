@@ -1,3 +1,5 @@
+name: nest-clean-rocket-test
+
 services:
   postgres-test:
     image: postgres:16-alpine

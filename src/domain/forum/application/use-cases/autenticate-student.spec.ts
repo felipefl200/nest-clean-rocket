@@ -1,8 +1,9 @@
+import { beforeEach, describe, expect, it } from 'vitest'
+
 import { FakeEncrypter } from '@/test/cryptography/fake-encrypter'
 import { FakerHasher } from '@/test/cryptography/fake-hasher'
 import { makeStudent } from '@/test/factories/make-student'
 import { InMemoryStudentsRepository } from '@/test/repositories/in-memory-students-repisotory'
-import { beforeEach, describe, expect, it } from 'vitest'
 
 import { AuthenticateStudentUseCase } from './autenticate-student'
 
@@ -23,21 +24,27 @@ describe('Authenticate Student', () => {
     const password = await fakerHasher.hash('123456')
 
     const newStudent = makeStudent({
-      email: 'johndoe@/test.net',
+      email: 'johndoe@test.net',
       password,
     })
 
     inMemoryStudentsRepository.items.push(newStudent)
 
     const result = await sut.execute({
-      email: 'johndoe@/test.net',
+      email: 'johndoe@test.net',
       password: '123456',
     })
 
     expect(result.isRight()).toBe(true)
     expect(result.value).toHaveProperty('accessToken')
-    expect(result.value).toEqual({
-      accessToken: expect.any(String),
+
+    if (result.isLeft()) {
+      throw result.value
+    }
+
+    expect(JSON.parse(result.value.accessToken)).toEqual({
+      sub: newStudent.id.toString(),
+      email: 'johndoe@test.net',
     })
   })
 })

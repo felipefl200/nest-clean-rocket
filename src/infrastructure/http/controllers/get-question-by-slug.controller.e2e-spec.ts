@@ -2,47 +2,51 @@ import { INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
-import { beforeAll, describe, expect, test } from 'vitest'
+import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 
-import { AppModule } from '@/src/infrastructure/app.module'
-import { PrismaService } from '@/src/infrastructure/database/prisma/prisma.service'
+import { AppModule } from '@/infra/app.module'
+import type { JwtPayload } from '@/infra/auth/jwt.stategy'
+import { DatabaseModule } from '@/infra/database/database.module'
+import { QuestionFactory } from '@/test/factories/make-prisma-question'
+import { StudentFactory } from '@/test/factories/make-prisma-student'
 
 describe('Get question by slug (E2E)', () => {
   let app: INestApplication
-  let prisma: PrismaService
+
   let jwt: JwtService
+  let studentFactory: StudentFactory
+  let questionFactory: QuestionFactory
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, DatabaseModule],
+      providers: [StudentFactory, QuestionFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
-
-    prisma = moduleRef.get(PrismaService)
     jwt = moduleRef.get(JwtService)
+    studentFactory = moduleRef.get(StudentFactory)
+    questionFactory = moduleRef.get(QuestionFactory)
 
     await app.init()
   })
 
+  afterAll(async () => {
+    await app.close()
+  })
+
   test('[GET] /questions/:slug', async () => {
-    const user = await prisma.user.create({
-      data: {
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        password: '123456',
-      },
-    })
+    const user = await studentFactory.makePrismaStudent()
 
-    const accessToken = jwt.sign({ sub: user.id, email: user.email })
+    const accessToken = jwt.sign({
+      sub: user.id.toString(),
+      email: user.email,
+    } satisfies JwtPayload)
 
-    await prisma.question.create({
-      data: {
-        title: 'Question 01',
-        slug: 'question-01',
-        content: 'Question content',
-        authorId: user.id,
-      },
+    await questionFactory.makePrismaQuestion({
+      title: 'Question 01',
+      content: 'question-01',
+      authorId: user.id,
     })
 
     const response = await request(app.getHttpServer())
@@ -52,7 +56,7 @@ describe('Get question by slug (E2E)', () => {
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
-      question: expect.objectContaining({ title: 'Question 01' }),
+      question: expect.objectContaining({ title: 'Question 01', slug: 'question-01' }),
     })
   })
 })

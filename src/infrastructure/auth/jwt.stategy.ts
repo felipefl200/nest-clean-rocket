@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
-import { Env } from '@/src/infrastructure/env/env-schema'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 import { z } from 'zod'
+
+import { Env } from '@/src/infrastructure/env/env-schema'
 
 const JwtPayloadSchema = z.object({
   sub: z.uuid(),
@@ -41,12 +42,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     })
   }
 
-  async validate(payload: JwtPayload): Promise<AuthenticatedUser> {
-    const validatedPayload = JwtPayloadSchema.parse(payload)
+  async validate(payload: unknown): Promise<AuthenticatedUser> {
+    const result = JwtPayloadSchema.safeParse(payload)
+
+    if (!result.success) {
+      throw new UnauthorizedException('Token inválido')
+    }
 
     return {
-      userId: validatedPayload.sub,
-      email: validatedPayload.email,
+      userId: result.data.sub,
+      email: result.data.email,
     }
   }
 }

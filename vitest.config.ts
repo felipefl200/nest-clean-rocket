@@ -4,6 +4,7 @@ import swc from 'unplugin-swc'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
+  oxc: false,
   plugins: [
     swc.vite({
       tsconfigFile: 'tsconfig.spec.json',
@@ -14,6 +15,7 @@ export default defineConfig({
       '@/src': path.resolve(__dirname, './src'),
       '@/core': path.resolve(__dirname, './src/core'),
       '@/domain': path.resolve(__dirname, './src/domain'),
+      '@/infra': path.resolve(__dirname, './src/infrastructure'),
       '@/prisma': path.resolve(__dirname, './prisma'),
       '@/test': path.resolve(__dirname, './test'),
     },
