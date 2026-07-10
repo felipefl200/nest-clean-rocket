@@ -6,10 +6,7 @@ import {
   NotificationProps,
 } from '@/domain/notification/enterprise/entities/notification'
 
-export function makeNotification(
-  override: Partial<NotificationProps> = {},
-  id?: UniqueEntityID,
-) {
+export function makeNotification(override: Partial<NotificationProps> = {}, id?: UniqueEntityID) {
   const notification = Notification.create(
     {
       recipientId: new UniqueEntityID(),

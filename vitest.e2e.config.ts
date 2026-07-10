@@ -11,17 +11,19 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@src': path.resolve(__dirname, './src'),
+      '@/src': path.resolve(__dirname, './src'),
       '@/core': path.resolve(__dirname, './src/core'),
       '@/domain': path.resolve(__dirname, './src/domain'),
-      '@test': path.resolve(__dirname, './test'),
+      '@/infrastructure': path.resolve(__dirname, './src/infrastructure'),
+      '@/prisma': path.resolve(__dirname, './prisma'),
+      '@/test': path.resolve(__dirname, './test'),
     },
   },
   test: {
     globals: true,
     environment: 'node',
     setupFiles: ['reflect-metadata', './test/setup-prisma.ts'],
-    include: ['test/**/*.e2e-spec.ts'],
+    include: ['test/**/*.e2e-spec.ts', 'src/**/*.e2e-spec.ts'],
     fileParallelism: false,
     sequence: {
       concurrent: false,

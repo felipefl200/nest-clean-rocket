@@ -1,6 +1,6 @@
-import { type Answer as PrismaAnswer, Prisma } from '@prisma/generated'
-import { UniqueEntityID } from '@src/core/entities/unique-entity-id'
-import { Answer } from '@src/domain/forum/enterprise/entities/answer'
+import { type Answer as PrismaAnswer, Prisma } from '@/prisma/generated'
+import { UniqueEntityID } from '@/src/core/entities/unique-entity-id'
+import { Answer } from '@/src/domain/forum/enterprise/entities/answer'
 
 export class PrismaAnswerMapper {
   static toDomain(raw: PrismaAnswer): Answer {

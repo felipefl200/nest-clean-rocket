@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
-import { PaginationParams } from '@src/core/repositories/pagination-params'
-import { QuestionCommentsRepository } from '@src/domain/forum/application/repositories/question-comments-repository'
-import { QuestionComment } from '@src/domain/forum/enterprise/entities/question-comment'
+import { PaginationParams } from '@/src/core/repositories/pagination-params'
+import { QuestionCommentsRepository } from '@/src/domain/forum/application/repositories/question-comments-repository'
+import { QuestionComment } from '@/src/domain/forum/enterprise/entities/question-comment'
 
 import { PrismaQuestionCommentMapper } from '../prisma/mappers/prisma-question-comment-mapper'
 import { PrismaService } from '../prisma/prisma.service'

@@ -6,10 +6,7 @@ import {
   AnswerCommentProps,
 } from '@/domain/forum/enterprise/entities/answer-comment'
 
-export function makeAnswerComment(
-  override: Partial<AnswerCommentProps> = {},
-  id?: UniqueEntityID,
-) {
+export function makeAnswerComment(override: Partial<AnswerCommentProps> = {}, id?: UniqueEntityID) {
   const answer = AnswerComment.create(
     {
       authorId: new UniqueEntityID(),

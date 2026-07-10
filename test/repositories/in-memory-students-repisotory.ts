@@ -1,5 +1,5 @@
-import { DomainEvents } from '@src/core/events/domain-events'
-import { StudentsRepository } from '@src/domain/forum/application/repositories/students-repository'
+import { DomainEvents } from '@/src/core/events/domain-events'
+import { StudentsRepository } from '@/src/domain/forum/application/repositories/students-repository'
 
 import { Student } from '@/domain/forum/enterprise/entities/student'
 

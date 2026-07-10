@@ -1,7 +1,7 @@
-import { Prisma, type Question as PrismaQuestion } from '@prisma/generated'
-import { UniqueEntityID } from '@src/core/entities/unique-entity-id'
-import { Question } from '@src/domain/forum/enterprise/entities/question'
-import { Slug } from '@src/domain/forum/enterprise/entities/value-objects/slug'
+import { Prisma, type Question as PrismaQuestion } from '@/prisma/generated'
+import { UniqueEntityID } from '@/src/core/entities/unique-entity-id'
+import { Question } from '@/src/domain/forum/enterprise/entities/question'
+import { Slug } from '@/src/domain/forum/enterprise/entities/value-objects/slug'
 
 export class PrismaQuestionMapper {
   static toDomain(raw: PrismaQuestion): Question {

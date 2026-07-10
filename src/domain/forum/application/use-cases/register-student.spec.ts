@@ -1,5 +1,5 @@
-import { FakerHasher } from '@test/cryptography/fake-hasher'
-import { InMemoryStudentsRepository } from '@test/repositories/in-memory-students-repisotory'
+import { FakerHasher } from '@/test/cryptography/fake-hasher'
+import { InMemoryStudentsRepository } from '@/test/repositories/in-memory-students-repisotory'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { RegisterStudentUseCase } from './register-student'
@@ -18,7 +18,7 @@ describe('Register Student', () => {
   it('should be able to register a new student', async () => {
     const result = await sut.execute({
       name: 'Felipe',
-      email: 'johndoe@test.net',
+      email: 'johndoe@/test.net',
       password: '123456',
     })
 

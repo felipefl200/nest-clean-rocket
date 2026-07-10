@@ -7,9 +7,7 @@ import { Answer } from '@/domain/forum/enterprise/entities/answer'
 export class InMemoryAnswersRepository implements AnswersRepository {
   public items: Answer[] = []
 
-  constructor(
-    private answerAttachmentsRepository: AnswerAttachmentsRepository,
-  ) {}
+  constructor(private answerAttachmentsRepository: AnswerAttachmentsRepository) {}
 
   async findById(id: string) {
     const answer = this.items.find((item) => item.id.toString() === id)

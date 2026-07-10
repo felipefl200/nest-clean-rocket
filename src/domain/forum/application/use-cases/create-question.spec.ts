@@ -1,5 +1,5 @@
-import { InMemoryQuestionAttachmentsRepository } from '@test/repositories/in-memory-question-attachments-repository'
-import { InMemoryQuestionsRepository } from '@test/repositories/in-memory-questions-repository'
+import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory-question-attachments-repository'
+import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory-questions-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'

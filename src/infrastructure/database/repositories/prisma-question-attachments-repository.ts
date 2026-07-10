@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
-import { QuestionAttachmentsRepository } from '@src/domain/forum/application/repositories/question-attachments-repository'
-import { QuestionAttachment } from '@src/domain/forum/enterprise/entities/question-attachment'
+
+import { QuestionAttachmentsRepository } from '@/src/domain/forum/application/repositories/question-attachments-repository'
+import { QuestionAttachment } from '@/src/domain/forum/enterprise/entities/question-attachment'
 
 import { PrismaQuestionAttachmentMapper } from '../prisma/mappers/prisma-question-attachment-mapper'
 import { PrismaService } from '../prisma/prisma.service'

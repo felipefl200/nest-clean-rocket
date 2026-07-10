@@ -7,10 +7,10 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common'
-import { StudentAlreadyExistsError } from '@src/domain/forum/application/use-cases/errors/student-already-exists-error'
-import { RegisterStudentUseCase } from '@src/domain/forum/application/use-cases/register-student'
-import { Public } from '@src/infrastructure/auth/public'
-import { ZodValidationPipe } from '@src/infrastructure/http/controllers/pipes/zod-validation-pipe'
+import { StudentAlreadyExistsError } from '@/src/domain/forum/application/use-cases/errors/student-already-exists-error'
+import { RegisterStudentUseCase } from '@/src/domain/forum/application/use-cases/register-student'
+import { Public } from '@/src/infrastructure/auth/public'
+import { ZodValidationPipe } from '@/src/infrastructure/http/controllers/pipes/zod-validation-pipe'
 import { z } from 'zod'
 
 const createAccountSchema = z.object({

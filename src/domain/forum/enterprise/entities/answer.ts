@@ -56,10 +56,7 @@ export class Answer extends AggregateRoot<AnswerProps> {
     this.touch()
   }
 
-  static create(
-    props: Optional<AnswerProps, 'createdAt' | 'attachments'>,
-    id?: UniqueEntityID,
-  ) {
+  static create(props: Optional<AnswerProps, 'createdAt' | 'attachments'>, id?: UniqueEntityID) {
     const answer = new Answer(
       {
         ...props,

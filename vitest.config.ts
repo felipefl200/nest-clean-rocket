@@ -11,10 +11,11 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@src': path.resolve(__dirname, './src'),
+      '@/src': path.resolve(__dirname, './src'),
       '@/core': path.resolve(__dirname, './src/core'),
       '@/domain': path.resolve(__dirname, './src/domain'),
-      '@test': path.resolve(__dirname, './test'),
+      '@/prisma': path.resolve(__dirname, './prisma'),
+      '@/test': path.resolve(__dirname, './test'),
     },
   },
   test: {

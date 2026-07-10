@@ -1,5 +1,5 @@
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common'
-import { FetchRecentQuestionsUseCase } from '@src/domain/forum/application/use-cases/fetch-recent-questions'
+import { FetchRecentQuestionsUseCase } from '@/src/domain/forum/application/use-cases/fetch-recent-questions'
 import z from 'zod'
 
 import { QuestionPresenter } from '../presenters/question-presenter'

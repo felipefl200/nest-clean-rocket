@@ -1,8 +1,8 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common'
-import { CreateQuestionUseCase } from '@src/domain/forum/application/use-cases/create-question'
-import { CurrentUser } from '@src/infrastructure/auth/current-user.decorator'
-import { AuthenticatedUser } from '@src/infrastructure/auth/jwt.stategy'
-import { ZodValidationPipe } from '@src/infrastructure/http/controllers/pipes/zod-validation-pipe'
+import { CreateQuestionUseCase } from '@/src/domain/forum/application/use-cases/create-question'
+import { CurrentUser } from '@/src/infrastructure/auth/current-user.decorator'
+import { AuthenticatedUser } from '@/src/infrastructure/auth/jwt.stategy'
+import { ZodValidationPipe } from '@/src/infrastructure/http/controllers/pipes/zod-validation-pipe'
 import z from 'zod'
 
 const createQuestionSchema = z.object({

@@ -22,12 +22,12 @@
     "skipLibCheck": true,
     "incremental": true,
     "paths": {
-      "@src/*": ["./src/*"],
-      "@infra/*": ["./src/infrastructure/*"],
+      "@/src/*": ["./src/*"],
+      "@/infra/*": ["./src/infrastructure/*"],
       "@/core/*": ["./src/core/*"],
       "@/domain/*": ["./src/domain/*"],
-      "@test/*": ["./test/*"],
-      "@prisma/*": ["./prisma/*"]
+      "@/test/*": ["./test/*"],
+      "@/prisma/*": ["./prisma/*"]
     },
     "types": ["node"]
   },

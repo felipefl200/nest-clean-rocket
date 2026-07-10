@@ -7,9 +7,7 @@ import { Question } from '@/domain/forum/enterprise/entities/question'
 export class InMemoryQuestionsRepository implements QuestionsRepository {
   public items: Question[] = []
 
-  constructor(
-    private questionAttachmentsRepository: QuestionAttachmentsRepository,
-  ) {}
+  constructor(private questionAttachmentsRepository: QuestionAttachmentsRepository) {}
 
   async findById(id: string) {
     const question = this.items.find((item) => item.id.toString() === id)
@@ -58,8 +56,6 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
 
     this.items.splice(itemIndex, 1)
 
-    this.questionAttachmentsRepository.deleteManyByQuestionId(
-      question.id.toString(),
-    )
+    this.questionAttachmentsRepository.deleteManyByQuestionId(question.id.toString())
   }
 }

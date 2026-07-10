@@ -48,9 +48,7 @@ export class EditAnswerUseCase {
     const currentAnswerAttachments =
       await this.answerAttachmentsRepository.findManyByAnswerId(answerId)
 
-    const answerAttachmentList = new AnswerAttachmentList(
-      currentAnswerAttachments,
-    )
+    const answerAttachmentList = new AnswerAttachmentList(currentAnswerAttachments)
 
     const answerAttachments = attachmentsIds.map((attachmentId) => {
       return AnswerAttachment.create({

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { Either, left, right } from '@src/core/either'
+import { Either, left, right } from '@/src/core/either'
 
 import { Encrypter } from '../cryptography/encrypter'
 import { HashComparer } from '../cryptography/hash-comparer'
