@@ -1,3 +1,6 @@
+import { beforeEach, describe, expect, it, MockInstance, vi } from 'vitest'
+
+import { OnQuestionBestAnswerChosen } from '@/domain/notification/application/subscribers/on-question-best-answer-chosen'
 import { makeAnswer } from '@/test/factories/make-answer'
 import { makeQuestion } from '@/test/factories/make-question'
 import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/in-memory-answer-attachments-repository'
@@ -6,9 +9,6 @@ import { InMemoryNotificationsRepository } from '@/test/repositories/in-memory-n
 import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory-question-attachments-repository'
 import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory-questions-repository'
 import { waitFor } from '@/test/utils/wait-for'
-import { beforeEach, describe, expect, it, MockInstance, vi } from 'vitest'
-
-import { OnQuestionBestAnswerChosen } from '@/domain/notification/application/subscribers/on-question-best-answer-chosen'
 
 import { SendNotificationUseCase } from '../use-cases/send-notification'
 

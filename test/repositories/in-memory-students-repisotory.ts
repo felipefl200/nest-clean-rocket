@@ -1,7 +1,6 @@
+import { Student } from '@/domain/forum/enterprise/entities/student'
 import { DomainEvents } from '@/src/core/events/domain-events'
 import { StudentsRepository } from '@/src/domain/forum/application/repositories/students-repository'
-
-import { Student } from '@/domain/forum/enterprise/entities/student'
 
 export class InMemoryStudentsRepository implements StudentsRepository {
   public items: Student[] = []

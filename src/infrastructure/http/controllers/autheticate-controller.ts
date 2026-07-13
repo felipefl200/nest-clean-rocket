@@ -6,11 +6,12 @@ import {
   UnauthorizedException,
   UsePipes,
 } from '@nestjs/common'
+import z from 'zod'
+
 import { AuthenticateStudentUseCase } from '@/src/domain/forum/application/use-cases/autenticate-student'
 import { WrongCredentialsError } from '@/src/domain/forum/application/use-cases/errors/wrong-credentials-error'
 import { Public } from '@/src/infrastructure/auth/public'
 import { ZodValidationPipe } from '@/src/infrastructure/http/controllers/pipes/zod-validation-pipe'
-import z from 'zod'
 
 const authenticateBodySchema = z.object({
   email: z.email(),

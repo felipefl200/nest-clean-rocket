@@ -1,9 +1,9 @@
-import { makeNotification } from '@/test/factories/make-notification'
-import { InMemoryNotificationsRepository } from '@/test/repositories/in-memory-notifications-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
+import { makeNotification } from '@/test/factories/make-notification'
+import { InMemoryNotificationsRepository } from '@/test/repositories/in-memory-notifications-repository'
 
 import { ReadNotificationUseCase } from './read-notification'
 

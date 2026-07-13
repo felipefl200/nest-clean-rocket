@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+
 import { Encrypter } from '@/src/domain/forum/application/cryptography/encrypter'
 
 @Injectable()

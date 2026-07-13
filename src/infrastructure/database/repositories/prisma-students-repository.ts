@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+
 import { StudentsRepository } from '@/src/domain/forum/application/repositories/students-repository'
 import { Student } from '@/src/domain/forum/enterprise/entities/student'
 

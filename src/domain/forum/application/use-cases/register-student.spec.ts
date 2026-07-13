@@ -1,6 +1,7 @@
+import { beforeEach, describe, expect, it } from 'vitest'
+
 import { FakerHasher } from '@/test/cryptography/fake-hasher'
 import { InMemoryStudentsRepository } from '@/test/repositories/in-memory-students-repisotory'
-import { beforeEach, describe, expect, it } from 'vitest'
 
 import { RegisterStudentUseCase } from './register-student'
 
