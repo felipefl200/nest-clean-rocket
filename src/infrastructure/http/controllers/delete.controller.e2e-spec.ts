@@ -8,18 +8,20 @@ import { AppModule } from '@/infra/app.module'
 import type { JwtPayload } from '@/infra/auth/jwt.stategy'
 import { DatabaseModule } from '@/infra/database/database.module'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
+import { QuestionFactory } from '@/test/factories/make-prisma-question'
 import { StudentFactory } from '@/test/factories/make-prisma-student'
 
-describe('Create question (E2E)', () => {
+describe('Edit question (E2E)', () => {
   let app: INestApplication
   let prisma: PrismaService
   let jwt: JwtService
   let studentFactory: StudentFactory
+  let questionFactory: QuestionFactory
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory],
+      providers: [StudentFactory, QuestionFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -27,6 +29,7 @@ describe('Create question (E2E)', () => {
     prisma = moduleRef.get(PrismaService)
     jwt = moduleRef.get(JwtService)
     studentFactory = moduleRef.get(StudentFactory)
+    questionFactory = moduleRef.get(QuestionFactory)
 
     await app.init()
   })
@@ -35,7 +38,7 @@ describe('Create question (E2E)', () => {
     await app.close()
   })
 
-  test('[POST] /questions', async () => {
+  test('[DELETE] /questions/:id', async () => {
     const user = await studentFactory.makePrismaStudent()
 
     const accessToken = jwt.sign({
@@ -43,22 +46,25 @@ describe('Create question (E2E)', () => {
       email: user.email,
     } satisfies JwtPayload)
 
+    const question = await questionFactory.makePrismaQuestion({
+      authorId: user.id,
+    })
+
+    const questionId = question.id.toString()
+
     const response = await request(app.getHttpServer())
-      .post('/questions')
+      .delete(`/questions/${questionId}`)
       .set('Authorization', `Bearer ${accessToken}`)
-      .send({
-        title: 'New question',
-        content: 'Question content',
-      })
+      .send()
 
-    expect(response.statusCode).toBe(201)
+    expect(response.statusCode).toBe(204)
 
-    const questionOnDatabase = await prisma.question.findFirst({
+    const questionOnDatabase = await prisma.question.findUnique({
       where: {
-        title: 'New question',
+        id: questionId,
       },
     })
 
-    expect(questionOnDatabase).toBeTruthy()
+    expect(questionOnDatabase).toBeNull()
   })
 })
