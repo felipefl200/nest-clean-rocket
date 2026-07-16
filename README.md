@@ -107,6 +107,7 @@ O projeto segue a **Clean Architecture**, onde as dependências apontam sempre p
 | **TypeScript 5**            | Tipagem estática                             |
 | **Prisma 7**                | ORM e migrations                             |
 | **PostgreSQL**              | Banco de dados relacional                    |
+| **Cloudflare R2**           | Armazenamento de anexos via API S3           |
 | **Passport + JWT (RS256)**  | Autenticação com chaves assimétricas         |
 | **Bcrypt**                  | Hash de senhas                               |
 | **Zod 4**                   | Validação de variáveis de ambiente e DTOs    |
@@ -209,19 +210,23 @@ Todas as variáveis são validadas na inicialização com **Zod**. A aplicação
 
 ### `.env` (desenvolvimento)
 
-| Variável               | Descrição                         | Exemplo                    |
-| ---------------------- | --------------------------------- | -------------------------- |
-| `NODE_ENV`             | Ambiente de execução              | `development`              |
-| `PORT`                 | Porta do servidor HTTP            | `3001`                     |
-| `DATABASE_URL`         | URL de conexão com o PostgreSQL   | `postgresql://...`         |
-| `POSTGRES_DB`          | Nome do banco de dados            | `nest_clean_rocket`        |
-| `POSTGRES_USER`        | Usuário do PostgreSQL             | `postgres`                 |
-| `POSTGRES_PASSWORD`    | Senha do PostgreSQL               | `postgres`                 |
-| `POSTGRES_PORT`        | Porta do PostgreSQL               | `5432`                     |
-| `JWT_PRIVATE_KEY_PATH` | Caminho para a chave privada RSA  | `./certs/jwtRS256.key`     |
-| `JWT_PUBLIC_KEY_PATH`  | Caminho para a chave pública RSA  | `./certs/jwtRS256.key.pub` |
-| `JWT_EXPIRES_IN`       | Tempo de expiração do token       | `15m`                      |
-| `BCRYPT_COST`          | Custo do algoritmo bcrypt (10–14) | `12`                       |
+| Variável                | Descrição                         | Exemplo                    |
+| ----------------------- | --------------------------------- | -------------------------- |
+| `NODE_ENV`              | Ambiente de execução              | `development`              |
+| `PORT`                  | Porta do servidor HTTP            | `3001`                     |
+| `DATABASE_URL`          | URL de conexão com o PostgreSQL   | `postgresql://...`         |
+| `POSTGRES_DB`           | Nome do banco de dados            | `nest_clean_rocket`        |
+| `POSTGRES_USER`         | Usuário do PostgreSQL             | `postgres`                 |
+| `POSTGRES_PASSWORD`     | Senha do PostgreSQL               | `postgres`                 |
+| `POSTGRES_PORT`         | Porta do PostgreSQL               | `5432`                     |
+| `JWT_PRIVATE_KEY_PATH`  | Caminho para a chave privada RSA  | `./certs/jwtRS256.key`     |
+| `JWT_PUBLIC_KEY_PATH`   | Caminho para a chave pública RSA  | `./certs/jwtRS256.key.pub` |
+| `JWT_EXPIRES_IN`        | Tempo de expiração do token       | `15m`                      |
+| `BCRYPT_COST`           | Custo do algoritmo bcrypt (10–14) | `12`                       |
+| `CLOUDFLARE_ACCOUNT_ID` | ID da conta Cloudflare            | `seu-account-id`           |
+| `AWS_BUCKET_NAME`       | Nome do bucket R2                 | `forum-attachments`        |
+| `AWS_ACCESS_KEY_ID`     | Access Key da API R2              | `...`                      |
+| `AWS_SECRET_ACCESS_KEY` | Secret Key da API R2              | `...`                      |
 
 > Use o arquivo [`.env.example`](.env.example) como base.
 
@@ -246,6 +251,12 @@ Arquivo separado utilizado pelos testes de integração. Aponta para um banco de
 | ------ | ------------ | ------------------------------------------- | ------ |
 | `POST` | `/questions` | Cria uma nova pergunta                      | ✅ JWT |
 | `GET`  | `/questions` | Lista as perguntas mais recentes (paginado) | ✅ JWT |
+
+### Anexos
+
+| Método | Rota           | Descrição                                   | Auth   |
+| ------ | -------------- | ------------------------------------------- | ------ |
+| `POST` | `/attachments` | Envia PNG/JPEG de até 5 MB e retorna seu ID | ✅ JWT |
 
 > ✅ **Rotas autenticadas** exigem o header: `Authorization: Bearer <token>`
 

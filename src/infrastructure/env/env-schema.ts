@@ -77,6 +77,11 @@ export const envSchema = z.object({
     .default(12),
 
   DATABASE_URL: postgresUrlSchema,
+
+  CLOUDFLARE_ACCOUNT_ID: z.string().trim().min(1, 'CLOUDFLARE_ACCOUNT_ID é obrigatória'),
+  AWS_BUCKET_NAME: z.string().trim().min(1, 'AWS_BUCKET_NAME é obrigatória'),
+  AWS_ACCESS_KEY_ID: z.string().trim().min(1, 'AWS_ACCESS_KEY_ID é obrigatória'),
+  AWS_SECRET_ACCESS_KEY: z.string().trim().min(1, 'AWS_SECRET_ACCESS_KEY é obrigatória'),
 })
 
 export type Env = z.infer<typeof envSchema>
