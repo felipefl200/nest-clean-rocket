@@ -29,7 +29,7 @@
       "@/test/*": ["./test/*"],
       "@/prisma/*": ["./prisma/*"]
     },
-    "types": ["node"]
+    "types": ["node", "multer"]
   },
   "include": ["src/**/*.ts", "test/**/*.ts"],
   "exclude": ["node_modules", "dist", "coverage"]

@@ -34,3 +34,17 @@ Authorization: Bearer {{token}}
 ### Listar perguntas
 GET {{host}}/questions?page=1&limit=10
 Authorization: Bearer {{token}}
+
+### Fazer upload de anexo (suporta png, jpg, jpeg, pdf - max 2MB)
+POST {{host}}/attachments
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=WebKitFormBoundary
+
+--WebKitFormBoundary
+Content-Disposition: form-data; name="file"; filename="sample.webp"
+Content-Type: image/webp
+
+< ./sample.webp
+--WebKitFormBoundary--
+
+### Teste rota UPLOAD
